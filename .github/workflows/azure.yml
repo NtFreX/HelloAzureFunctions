@@ -38,3 +38,11 @@ jobs:
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         package: './src/server/output'
+
+    - name: 'Deploy static html'
+      uses: sebastianpopp/git-ftp-action@releases/v2
+      with:
+        url: ${{ secrets.AZURE_FTP_PATH }}
+        user: ${{ secrets.AZURE_FTP_USER }}
+        password: ${{ secrets.AZURE_FTP_PWD }}
+        syncroot: './src/client'
