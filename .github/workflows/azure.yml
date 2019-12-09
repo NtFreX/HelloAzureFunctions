@@ -38,9 +38,6 @@ jobs:
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         package: './src/server/output'
-        
-    - name: 'Predeploy static html'
-      run: cp -avr 'src/client' 'client_build'
   
     - name: 'Deploy static html'
       uses: SamKirkland/FTP-Deploy-Action@2.0.0
@@ -49,5 +46,5 @@ jobs:
         FTP_USERNAME: ${{ secrets.AZURE_FTP_USER }}
         FTP_PASSWORD: ${{ secrets.AZURE_FTP_PWD }}
         ARGS: --delete
-        LOCAL_DIR: 'client_build'
+        LOCAL_DIR: 'src/client'
         REMOTE_DIR: 'site/wwwroot'
