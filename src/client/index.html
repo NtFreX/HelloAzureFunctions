@@ -6,9 +6,11 @@
         <script type="text/javascript">
             $(document).ready(() => {
                 $.get('https://ntfrex-function-helloworld.azurewebsites.net/api/HelloFunctions?name=Fredy', (data) => {
-                    document.body = '<p>' + data + '</p>'
+                    document.body.innerHTML = '<p>' + data + '</p>'
                 });
             });
         </script>
+
+        <p>Waiting for answer from azure...</p>
     </body>
 </html>
