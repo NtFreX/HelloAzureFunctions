@@ -29,7 +29,7 @@ jobs:
       shell: bash
       run: |
         pushd .
-        dotnet build src/server/Azure.Functions.HelloWorld.csproj --configuration Release --output ./output/server
+        dotnet build src/server/Azure.Functions.HelloWorld.csproj --configuration Release --output /output/server
         popd
         
     - name: 'Deploy Azure Functions'
