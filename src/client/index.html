@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            $(document).ready(() => {
+                $.get('https://ntfrex-function-helloworld.azurewebsites.net/api/HelloFunctions?name=Fredy', (data) => {
+                    document.body = '<p>' + data + '</p>'
+                });
+            });
+        </script>
+    </body>
+</html>
