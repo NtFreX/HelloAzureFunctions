@@ -29,7 +29,7 @@ jobs:
       shell: bash
       run: |
         pushd .
-        dotnet build --configuration Release --output ./output
+        dotnet build src/server/Azure.Functions.HelloWorld.csproj --configuration Release --output ./output/server
         popd
         
     - name: 'Deploy Azure Functions'
@@ -37,4 +37,4 @@ jobs:
       id: fa
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        package: './output'
+        package: './output/server'
