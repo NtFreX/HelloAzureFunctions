@@ -7,6 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace NtFreX
 {
@@ -25,9 +26,15 @@ namespace NtFreX
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             name = name ?? data?.name;
 
-            return name != null
-                ? (ActionResult)new OkObjectResult($"Hello, \"{name}\"")
-                : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
+            try {
+                HttpClient client = new HttpClient();
+                var response = await client.GetAsync("https://storageaccountdefaubc55.table.core.windows.net/User()$top=10");
+                return new OkObjectResult(await response.Content.ReadAsStringAsync());
+            } catch { 
+                return name != null
+                    ? (ActionResult)new OkObjectResult($"Hello {name}")
+                    : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
+            }
         }
     }
 }
