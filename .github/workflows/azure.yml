@@ -14,6 +14,11 @@ jobs:
     steps:
     - name: 'Checkout git'
       uses: actions/checkout@master
+      
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - name: 'Setup .NET Core ${{ env.DOTNET_VERSION }}'
       uses: actions/setup-dotnet@v1
@@ -32,4 +37,4 @@ jobs:
       id: fa
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: './output'
