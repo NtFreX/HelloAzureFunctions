@@ -12,16 +12,24 @@ jobs:
     name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Use .NetCore ${{ env.DOTNET_VERSION }}
+    - name: 'Checkout git'
+      uses: actions/checkout@master
+    
+    - name: 'Setup .NET Core ${{ env.DOTNET_VERSION }}'
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
-    - name: build
+
+    - name: 'Run dotnet build'
+      shell: bash
       run: |
-        dotnet build Azure.Functions.HelloWorld.csproj
-    - name: 'Deploy to Azure WebApp'
+        pushd .
+        dotnet build --configuration Release --output ./output
+        popd
+        
+    - name: 'Deploy Azure Functions'
       uses: azure/functions-action@v1
+      id: fa
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
