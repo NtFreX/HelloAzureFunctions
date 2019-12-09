@@ -46,5 +46,5 @@ jobs:
         FTP_USERNAME: ${{ secrets.AZURE_FTP_USER }}
         FTP_PASSWORD: ${{ secrets.AZURE_FTP_PWD }}
         ARGS: --delete
-        LOCAL_DIR: 'src\\client'
+        LOCAL_DIR: 'src/client'
         REMOTE_DIR: 'site/wwwroot/'
