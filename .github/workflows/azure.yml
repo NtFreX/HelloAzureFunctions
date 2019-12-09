@@ -38,7 +38,7 @@ jobs:
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         package: './src/server/output'
-  
+        
     - name: 'Predeploy static html'
       run: cp -avr 'src/client' 'client_build'
   
@@ -50,4 +50,4 @@ jobs:
         FTP_PASSWORD: ${{ secrets.AZURE_FTP_PWD }}
         ARGS: --delete
         LOCAL_DIR: 'client_build'
-        REMOTE_DIR: 'site/wwwroot/'
+        REMOTE_DIR: 'site/wwwroot'
