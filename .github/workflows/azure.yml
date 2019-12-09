@@ -38,12 +38,13 @@ jobs:
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         package: './src/server/output'
-
+  
     - name: 'Deploy static html'
       uses: SamKirkland/FTP-Deploy-Action@2.0.0
       env:
         FTP_SERVER: ${{ secrets.AZURE_FTP_PATH }}
         FTP_USERNAME: ${{ secrets.AZURE_FTP_USER }}
         FTP_PASSWORD: ${{ secrets.AZURE_FTP_PWD }}
-        ARGS: --delete --force
+        ARGS: --delete
         LOCAL_DIR: 'src/client'
+        REMOTE_DIR: 'site/wwwroot'
