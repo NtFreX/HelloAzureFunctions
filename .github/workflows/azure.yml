@@ -45,4 +45,4 @@ jobs:
         url: ${{ secrets.AZURE_FTP_PATH }}
         user: ${{ secrets.AZURE_FTP_USER }}
         password: ${{ secrets.AZURE_FTP_PWD }}
-        syncroot: './src/client'
+        syncroot: 'src/client'
