@@ -40,9 +40,10 @@ jobs:
         package: './src/server/output'
 
     - name: 'Deploy static html'
-      uses: sebastianpopp/git-ftp-action@releases/v2
-      with:
-        url: ${{ secrets.AZURE_FTP_PATH }}
-        user: ${{ secrets.AZURE_FTP_USER }}
-        password: ${{ secrets.AZURE_FTP_PWD }}
-        syncroot: 'src/client'
+      uses: SamKirkland/FTP-Deploy-Action@2.0.0
+      env:
+        FTP_SERVER: ${{ secrets.AZURE_FTP_PATH }}
+        FTP_USERNAME: ${{ secrets.AZURE_FTP_USER }}
+        FTP_PASSWORD: ${{ secrets.AZURE_FTP_PWD }}
+        ARGS: --delete --force
+        LOCAL_DIR: 'src/client'
