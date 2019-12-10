@@ -23,6 +23,8 @@ namespace NtFreX.HelloAzureFunctions.Functions
         {
             log.LogInformation($"{nameof(GetUsersFunction)} is running");
 
+            log.LogInformation($"Is UserRepository null = {_userRepository == null}"); // TODO: delete
+
             return new OkObjectResult(_userRepository.GetUsers());
         }
     }
