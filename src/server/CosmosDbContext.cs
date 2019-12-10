@@ -1,5 +1,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using NtFreX.HelloAzureFunctions.Entities;
 
 namespace NtFreX.HelloAzureFunctions.Repositories {
@@ -9,12 +10,19 @@ namespace NtFreX.HelloAzureFunctions.Repositories {
 
         private readonly string _connectionKey;
         private readonly string _connectionEndpoint;
+        private readonly ILogger _logger;
 
         public DbSet<UserEntity> Users;
 
-        public CosmosDbContext() {
+        public CosmosDbContext(ILogger logger) {
+            _logger = logger;
+
+            // TODO: use key value references
             _connectionKey =  Environment.GetEnvironmentVariable("CosmosDbKey", EnvironmentVariableTarget.Process);
             _connectionEndpoint =  Environment.GetEnvironmentVariable("CosmosDbEndpoint", EnvironmentVariableTarget.Process);
+
+            _logger.LogInformation($"CosmosDbEndpoint = {_connectionEndpoint}");
+            _logger.LogInformation($"CosmosDbKey = {(string.IsNullOrEmpty(_connectionKey) ? "" : "***")}");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -25,6 +33,8 @@ namespace NtFreX.HelloAzureFunctions.Repositories {
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            _logger.LogInformation($"{nameof(CosmosDbContext)}.{nameof(OnModelCreating)} has been called");
+
             modelBuilder.HasDefaultContainer(ContainerName);
             modelBuilder.Entity<UserEntity>().ToContainer("Users");
         }
