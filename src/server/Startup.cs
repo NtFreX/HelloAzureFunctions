@@ -27,6 +27,7 @@ namespace NtFreX.HelloAzureFunctions
                     await context.Database.EnsureCreatedAsync();
                 }    
             } catch (Exception ex) {
+                // TODO: fix logging
                 var logger = provider.GetService<ILogger>();
                 logger?.LogError(ex, "Setting up the database failed");
             }
