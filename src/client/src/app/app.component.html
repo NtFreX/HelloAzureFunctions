@@ -1,0 +1,13 @@
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+
+<ul>
+    <li *ngFor="let user of users; let i = index">
+        {{i}} {{item}}
+    </li>
+</ul>
+
+<router-outlet></router-outlet>

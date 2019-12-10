@@ -4,3 +4,7 @@
 # .NET build output
 /src/server/obj/
 /src/server/bin/
+
+# Angular
+/src/client/node_modules/
+/src/client/dist/

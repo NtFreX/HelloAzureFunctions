@@ -6,6 +6,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: NtFreX-Function-HelloWorld
   DOTNET_VERSION: '3.1.100'
+  NODE_VERSION: ''
 
 jobs:
   build-and-deploy:
@@ -20,6 +21,11 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
+    - name: 'Setup Node.js ${{ env.NODE_VERSION }}'
+      uses: 'actions/setup-node@v1'
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
     - name: 'Setup .NET Core ${{ env.DOTNET_VERSION }}'
       uses: actions/setup-dotnet@v1
       with:
@@ -31,6 +37,12 @@ jobs:
         pushd .
         dotnet build src/server/Azure.Functions.HelloWorld.csproj --configuration Release --output ./server_output
         popd
+
+    - name: 'Run npm install and ng build'
+      run: |
+        npm install
+        ng build --prod
+        ng test
         
     - name: 'Deploy Azure Functions'
       uses: azure/functions-action@v1.1.2
@@ -46,5 +58,5 @@ jobs:
         FTP_USERNAME: ${{ secrets.AZURE_FTP_USER }}
         FTP_PASSWORD: ${{ secrets.AZURE_FTP_PWD }}
         ARGS: --delete
-        LOCAL_DIR: 'src/client'
+        LOCAL_DIR: 'src/client/dist/client'
         REMOTE_DIR: 'site/wwwroot'
