@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using NtFreX.HelloAzureFunctions.Repositories;
@@ -13,10 +15,17 @@ namespace NtFreX.HelloAzureFunctions
             builder.Services.AddTransient<UserRepository>();
             builder.Services.AddTransient<CosmosDbContext>();
 
-            /*var provider = builder.Services.BuildServiceProvider();
-            using(var context = provider.GetRequiredService<CosmosDbContext>()) {
-                context.Database.EnsureCreatedAsync().GetAwaiter().GetResult();
-            }*/
+            TrySetupDatabase(builder.Services.BuildServiceProvider()).GetAwaiter().GetResult();
+        }
+
+        private async Task TrySetupDatabase(ServiceProvider provider) {
+            try {
+                using(var context = provider.GetRequiredService<CosmosDbContext>()) {
+                    await context.Database.EnsureCreatedAsync();
+                }    
+            } catch (Exception ex) {
+                throw new Exception("Setting up the database failed", ex);
+            }  
         }
     }
 }

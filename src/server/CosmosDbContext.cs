@@ -12,7 +12,7 @@ namespace NtFreX.HelloAzureFunctions.Repositories {
 
         public DbSet<UserEntity> Users;
 
-        public CosmosDbContext(){
+        public CosmosDbContext() {
             _connectionKey =  Environment.GetEnvironmentVariable("HelloAzureFunctionsCosmosDbKey", EnvironmentVariableTarget.Process);
             _connectionEndpoint =  Environment.GetEnvironmentVariable("HelloAzureFunctionsCosmosDbEndpoint", EnvironmentVariableTarget.Process);
         }
