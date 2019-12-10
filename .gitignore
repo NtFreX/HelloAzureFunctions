@@ -1,3 +1,6 @@
 # VsCode settings
 /.vscode/
 
+# .NET build output
+/src/server/obj/
+/src/server/bin/

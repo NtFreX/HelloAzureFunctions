@@ -6,7 +6,7 @@
     <body>
         <script type="text/javascript">
             $(document).ready(() => {
-                $.get('https://ntfrex-function-helloworld.azurewebsites.net/api/HelloFunctions?name=Fredy', (data) => {
+                $.get('https://ntfrex-function-helloworld.azurewebsites.net/api/users', (data) => {
                     document.body.innerHTML = '<h3>' + data + '</h3>'
                 });
             });
