@@ -36,7 +36,7 @@ namespace NtFreX.HelloAzureFunctions.Functions
                 await _userRepository.AddUserAsync(user);
                 return new OkResult();
             } catch (Exception ex) {
-                ErrorHandler.Handle(ex, log);
+                return ErrorHandler.Handle(ex, log);
             }
         }
     }
