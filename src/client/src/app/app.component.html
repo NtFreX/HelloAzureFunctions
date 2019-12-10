@@ -1,16 +1,16 @@
-<div style="text-align:center">
+<div style="text-align:center" [attr.disabled]="isLoading ? true : null">
   <h1>
     Welcome to {{ title }}!
   </h1>
-</div>
 
-<ul>
+  <ul>
     <li *ngFor="let user of users; let i = index">
         {{i}} {{user.name}}
     </li>
-</ul>
+  </ul>
 
-<div>
+  <div>
     <input [(ngModel)]="username">
-    <button (click)="addUser()">Add user</button>
+      <button (click)="addUser()">Add user</button>
+  </div>
 </div>
