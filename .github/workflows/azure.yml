@@ -35,7 +35,7 @@ jobs:
       shell: bash
       run: |
         pushd .
-        dotnet build src/server/Azure.Functions.HelloWorld.csproj --configuration Release --output ./dist
+        dotnet build src/server/Azure.Functions.HelloWorld.csproj --configuration Release --output ./src/server/dist
         popd
 
     - name: 'Run npm install and ng build'
@@ -43,7 +43,6 @@ jobs:
         cd src/client
         npm install
         npm run build:prod
-        npm run test
         
     - name: 'Deploy Azure Functions'
       uses: azure/functions-action@v1.1.2

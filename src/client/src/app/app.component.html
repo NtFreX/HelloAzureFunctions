@@ -6,7 +6,7 @@
 
 <ul>
     <li *ngFor="let user of users; let i = index">
-        {{i}} {{item}}
+        {{i}} {{user.name}}
     </li>
 </ul>
 
@@ -14,5 +14,3 @@
     <input [(ngModel)]="username">
     <button (click)="addUser()">Add user</button>
 </div>
-
-<router-outlet></router-outlet>
