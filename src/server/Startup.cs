@@ -14,7 +14,6 @@ namespace NtFreX.HelloAzureFunctions
         public override void Configure(IFunctionsHostBuilder builder)
         {
             builder.Services.AddLogging();
-
             builder.Services.AddTransient<UserRepository>();
             builder.Services.AddTransient<CosmosDbContext>();
 
@@ -28,7 +27,7 @@ namespace NtFreX.HelloAzureFunctions
                 }    
             } catch (Exception ex) {
                 // TODO: fix logging
-                var logger = provider.GetService<ILogger>();
+                var logger = provider.GetService<ILogger<FunctionsStartup>>();
                 logger?.LogError(ex, "Setting up the database failed");
             }
         }
