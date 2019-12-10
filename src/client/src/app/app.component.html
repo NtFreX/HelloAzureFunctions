@@ -1,4 +1,4 @@
-<div style="text-align:center" [attr.disabled]="isLoading ? true : null">
+<div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
   </h1>
@@ -11,6 +11,6 @@
 
   <div>
     <input [(ngModel)]="username">
-      <button (click)="addUser()">Add user</button>
+      <button (click)="addUser()" [disabled]="isLoading || hasError">Add user</button>
   </div>
 </div>
