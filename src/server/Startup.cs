@@ -17,17 +17,12 @@ namespace NtFreX.HelloAzureFunctions
             builder.Services.AddTransient<UserRepository>();
             builder.Services.AddTransient<CosmosDbContext>();
 
-            TrySetupDatabase(builder.Services.BuildServiceProvider()).GetAwaiter().GetResult();
+            SetupDatabase(builder.Services.BuildServiceProvider()).GetAwaiter().GetResult();
         }
 
-        private async Task TrySetupDatabase(ServiceProvider provider) {
-            try {
-                using(var context = provider.GetRequiredService<CosmosDbContext>()) {
-                    await context.Database.EnsureCreatedAsync();
-                }    
-            } catch {
-                /* logging is not availble during startup */
-                /* TODO: fix logging */
+        private async Task SetupDatabase(ServiceProvider provider) {
+            using(var context = provider.GetRequiredService<CosmosDbContext>()) {
+                await context.Database.EnsureCreatedAsync();
             }
         }
     }

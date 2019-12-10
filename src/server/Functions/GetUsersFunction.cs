@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using NtFreX.HelloAzureFunctions.Repositories;
 using NtFreX.HelloAzureFunctions.Extensions;
+using System;
 
 namespace NtFreX.HelloAzureFunctions.Functions
 {
@@ -14,7 +15,7 @@ namespace NtFreX.HelloAzureFunctions.Functions
         private readonly UserRepository _userRepository;
 
         public GetUsersFunction(UserRepository userRepository) {
-            _userRepository = userRepository;
+            _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         }
 
         [FunctionName("GetUsersFunction")]

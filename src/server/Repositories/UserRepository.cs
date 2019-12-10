@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using NtFreX.HelloAzureFunctions.Entities;
@@ -8,7 +9,7 @@ namespace NtFreX.HelloAzureFunctions.Repositories {
 
         public UserRepository(CosmosDbContext dbContext)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
         public IAsyncEnumerable<UserEntity> GetUsersAsync() {
