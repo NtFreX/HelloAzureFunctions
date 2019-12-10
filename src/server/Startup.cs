@@ -25,10 +25,9 @@ namespace NtFreX.HelloAzureFunctions
                 using(var context = provider.GetRequiredService<CosmosDbContext>()) {
                     await context.Database.EnsureCreatedAsync();
                 }    
-            } catch (Exception ex) {
-                // TODO: fix logging
-                var logger = provider.GetService<ILogger<FunctionsStartup>>();
-                logger?.LogError(ex, "Setting up the database failed");
+            } catch {
+                /* logging is not availble during startup */
+                /* TODO: fix logging */
             }
         }
     }
