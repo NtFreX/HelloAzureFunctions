@@ -28,7 +28,7 @@ export class AppComponent {
     const body = JSON.stringify({ name: this.username });
     const self = this;
     this.client
-      .post('https://ntfrex-function-helloworld.azurewebsites.net/api/users', body)
+      .post('https://ntfrex-function-helloworld.azurewebsites.net/api/user', body)
       .subscribe(() => self.load());
   }
 }

@@ -13,10 +13,10 @@ namespace NtFreX.HelloAzureFunctions
             builder.Services.AddTransient<UserRepository>();
             builder.Services.AddTransient<CosmosDbContext>();
 
-            var provider = builder.Services.BuildServiceProvider();
+            /*var provider = builder.Services.BuildServiceProvider();
             using(var context = provider.GetRequiredService<CosmosDbContext>()) {
                 context.Database.EnsureCreatedAsync().GetAwaiter().GetResult();
-            }
+            }*/
         }
     }
 }
