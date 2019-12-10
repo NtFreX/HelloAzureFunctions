@@ -5,7 +5,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: NtFreX-Function-HelloWorld
-  DOTNET_VERSION: '2.1.607'
+  DOTNET_VERSION: '3.1.100'
 
 jobs:
   build-and-deploy:
