@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using NtFreX.HelloAzureFunctions.Repositories;
 
 [assembly: FunctionsStartup(typeof(NtFreX.HelloAzureFunctions.Startup))]
@@ -12,6 +13,8 @@ namespace NtFreX.HelloAzureFunctions
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
+            builder.Services.AddLogging();
+
             builder.Services.AddTransient<UserRepository>();
             builder.Services.AddTransient<CosmosDbContext>();
 
@@ -24,8 +27,9 @@ namespace NtFreX.HelloAzureFunctions
                     await context.Database.EnsureCreatedAsync();
                 }    
             } catch (Exception ex) {
-                throw new Exception("Setting up the database failed", ex);
-            }  
+                var logger = provider.GetRequiredService<ILogger>();
+                logger.LogError(ex, "Setting up the database failed");
+            }
         }
     }
 }
