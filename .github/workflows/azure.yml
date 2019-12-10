@@ -35,7 +35,7 @@ jobs:
       shell: bash
       run: |
         pushd .
-        dotnet build src/server/Azure.Functions.HelloWorld.csproj --configuration Release --output ./server_output
+        dotnet build src/server/Azure.Functions.HelloWorld.csproj --configuration Release --output ./dist
         popd
 
     - name: 'Run npm install and ng build'
@@ -50,7 +50,7 @@ jobs:
       id: fa
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        package: './server_output'
+        package: './src/server/dist'
   
     - name: 'Deploy static html'
       uses: SamKirkland/FTP-Deploy-Action@2.0.0
