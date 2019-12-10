@@ -1,4 +1,5 @@
 
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -27,12 +28,16 @@ namespace NtFreX.HelloAzureFunctions.Functions
         {
             log.LogInformation($"{nameof(AddUserFunction)} is running");
 
-            var reader = new StreamReader(req.Body);
-            var body = await reader.ReadToEndAsync();
-            var user = JsonConvert.DeserializeObject<UserEntity>(body);
+            try {
+                var reader = new StreamReader(req.Body);
+                var body = await reader.ReadToEndAsync();
+                var user = JsonConvert.DeserializeObject<UserEntity>(body);
 
-            await _userRepository.AddUserAsync(user);
-            return new OkResult();
+                await _userRepository.AddUserAsync(user);
+                return new OkResult();
+            } catch (Exception ex) {
+                ErrorHandler.Handle(ex, log);
+            }
         }
     }
 }
