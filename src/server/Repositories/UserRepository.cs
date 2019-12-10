@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using NtFreX.HelloAzureFunctions.Entities;
 
@@ -12,8 +13,8 @@ namespace NtFreX.HelloAzureFunctions.Repositories {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public IAsyncEnumerable<UserEntity> GetUsersAsync() {
-            return _dbContext.Users.AsAsyncEnumerable();
+        public UserEntity[] GetUsers() {
+            return _dbContext.Users.AsQueryable().ToArray();
         }
 
         public async Task AddUserAsync(UserEntity user) { 

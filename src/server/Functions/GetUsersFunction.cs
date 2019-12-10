@@ -19,14 +19,13 @@ namespace NtFreX.HelloAzureFunctions.Functions
         }
 
         [FunctionName("GetUsersFunction")]
-        public async Task<IActionResult> Get(
+        public IActionResult Get(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "users")] HttpRequest req,
             ILogger log)
         {
             log.LogInformation($"{nameof(GetUsersFunction)} is running");
 
-            var users = await _userRepository.GetUsersAsync().ToListAsync();
-            return new OkObjectResult(users);
+            return new OkObjectResult(_userRepository.GetUsers());
         }
     }
 }
