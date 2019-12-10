@@ -22,7 +22,7 @@ namespace NtFreX.HelloAzureFunctions.Functions
 
         [FunctionName("AddUserFunction")]
         public async Task<IActionResult> Get(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "user")] HttpRequest req,
             ILogger log)
         {
             log.LogInformation($"{nameof(AddUserFunction)} is running");
