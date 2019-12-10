@@ -8,13 +8,27 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'client';
+  username: '';
   users: any;
 
-  constructor(client: HttpClient) {
-      client
-        .get('https://ntfrex-function-helloworld.azurewebsites.net/api/users')
-        .subscribe((data) => {
-            this.users = data;
-        });
+  constructor(private client: HttpClient) {
+    this.load();
+  }
+
+  private load(): void {
+    const self = this;
+    this.client
+    .get('https://ntfrex-function-helloworld.azurewebsites.net/api/users')
+    .subscribe((data) => {
+        self.users = data;
+    });
+  }
+
+  addUser(): void {
+    const body = JSON.stringify({ name: this.username });
+    const self = this;
+    this.client
+      .post('https://ntfrex-function-helloworld.azurewebsites.net/api/users', body)
+      .subscribe(() => self.load());
   }
 }
