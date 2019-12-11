@@ -24,7 +24,7 @@ namespace NtFreX.HelloAzureFunctions.Functions
             log.LogInformation($"{nameof(GetUsersFunction)} is running");
 
             try {
-                return new OkObjectResult(_userRepository.GetUsers());
+                return new OkObjectResult(_userRepository.GetUsers(log));
             } catch (Exception ex) {
                 return ErrorHandler.Handle(ex, log);
             }
