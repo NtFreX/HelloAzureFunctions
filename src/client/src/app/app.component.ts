@@ -14,6 +14,8 @@ export class AppComponent {
   isLoading = false;
   hasError = false;
 
+  private baseUri = 'https://ntfrex-function-helloworld.azurewebsites.net/api/';
+
   constructor(private client: HttpClient) {
     this.load();
   }
@@ -32,7 +34,7 @@ export class AppComponent {
     this.users = null;
     const self = this;
     this.client
-    .get('https://ntfrex-function-helloworld.azurewebsites.net/api/users')
+    .get(this.baseUri + 'users')
     .pipe(this.handleError())
     .subscribe((data) => {
         self.users = data;
@@ -44,7 +46,7 @@ export class AppComponent {
     this.isLoading = true;
     const self = this;
     this.client
-        .delete(`https://ntfrex-function-helloworld.azurewebsites.net/api/user/${user.id}`)
+        .delete(this.baseUri + `user/${user.id}`)
         .pipe(this.handleError())
         .subscribe(() => self.load());
   }
@@ -54,7 +56,7 @@ export class AppComponent {
     const body = JSON.stringify({ name: this.username });
     const self = this;
     this.client
-      .post('https://ntfrex-function-helloworld.azurewebsites.net/api/user', body)
+      .post(this.baseUri + 'user', body)
       .pipe(this.handleError())
       .subscribe(() => self.load());
   }
