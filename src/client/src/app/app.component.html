@@ -3,9 +3,11 @@
         Welcome to {{ title }}!
     </h1>
 
-    <ngb-alert *ngIf="isLoading" type="info" [dismissible]="false">Loading...</ngb-alert>
     <ngb-alert *ngIf="hasError" type="danger" [dismissible]="false">An error occurred</ngb-alert>
-  
+    <div *ngIf="isLoading" class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+    </div>
+    
     <table class="table table-striped">
         <thead>
             <tr>
@@ -21,13 +23,17 @@
                 <th scope="row">{{ i + 1 }}</th>
                 <td>{{ user.id }}</td>
                 <td>{{ user.name }}</td>
-                <td><button ngbButton (click)="deleteUser(user)" [disabled]="isLoading">X</button></td>
+                <td>
+                    <button (click)="deleteUser(user)" [disabled]="isLoading" type="button" class="btn btn-outline-danger">
+                        <img src="/assets/trash.svg" width="24" height="24" title="Trash">
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
 
     <div>
         <input [(ngModel)]="username">
-        <button ngbButton (click)="addUser()" [disabled]="isLoading || hasError">Add user</button>
+        <button type="button" class="btn btn-primary" (click)="addUser()" [disabled]="isLoading || hasError">Add user</button>
     </div>
 </div>
