@@ -54,6 +54,7 @@ export class AppComponent {
   addUser(): void {
     this.isLoading = true;
     const body = JSON.stringify({ name: this.username });
+    this.username = '';
     const self = this;
     this.client
       .post(this.baseUri + 'user', body)
