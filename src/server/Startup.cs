@@ -20,7 +20,6 @@ namespace NtFreX.HelloAzureFunctions
 
         private void ConfigureDatabase(IServiceCollection services) {
             try {
-                // TODO: use key value references
                 var connectionKey =  Environment.GetEnvironmentVariable("CosmosDbKey", EnvironmentVariableTarget.Process);
                 var connectionEndpoint =  Environment.GetEnvironmentVariable("CosmosDbEndpoint", EnvironmentVariableTarget.Process);
                 var databaseName = "HelloFunctions";
