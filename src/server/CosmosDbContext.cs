@@ -1,10 +1,8 @@
-using System;
 using Microsoft.EntityFrameworkCore;
 using NtFreX.HelloAzureFunctions.Entities;
 
 namespace NtFreX.HelloAzureFunctions.Repositories {
     public class CosmosDbContext : DbContext {
-        public const string DatabaseName = "HelloFunctions";
         public const string ContainerName = "Container";
 
         private readonly string _connectionKey;
@@ -12,17 +10,8 @@ namespace NtFreX.HelloAzureFunctions.Repositories {
 
         public DbSet<UserEntity> Users;
 
-        public CosmosDbContext() {
-            // TODO: use key value references
-            _connectionKey =  Environment.GetEnvironmentVariable("CosmosDbKey", EnvironmentVariableTarget.Process);
-            _connectionEndpoint =  Environment.GetEnvironmentVariable("CosmosDbEndpoint", EnvironmentVariableTarget.Process);
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseCosmos(
-                    _connectionEndpoint,
-                    _connectionKey,
-                    databaseName: DatabaseName);
+        public CosmosDbContext(DbContextOptions<CosmosDbContext> options)
+            :base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
