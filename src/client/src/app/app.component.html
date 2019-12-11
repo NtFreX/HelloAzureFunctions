@@ -33,7 +33,7 @@
     </table>
 
     <div>
-        <input [(ngModel)]="username">
+        <input [(ngModel)]="username" (keyup.enter)="addUser()">
         <button type="button" class="btn btn-primary" (click)="addUser()" [disabled]="isLoading || hasError">Add user</button>
     </div>
 </div>
