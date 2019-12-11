@@ -24,10 +24,11 @@
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/styles/bootstrap.min.css"
             ],
             "assets": [
-                "src/assets"
+                "src/assets/svg"
             ],
             "scripts": []
           },
