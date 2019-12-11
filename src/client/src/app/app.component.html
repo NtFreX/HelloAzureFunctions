@@ -3,7 +3,7 @@
         Welcome
     </h1>
 
-    <ngb-alert *ngIf="hasError" type="danger" [dismissible]="false">An error occurred</ngb-alert>
+    <ngb-alert *ngIf="errorMessage !== null" type="danger" [dismissible]="false">{{errorMessage}}</ngb-alert>
     <div *ngIf="isLoading" class="progress">
         <div class="progress-bar progress-bar-striped progress-bar-animated full-width" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
@@ -44,7 +44,7 @@
                             <input required type="text" class="form-control full-width" [(ngModel)]="username" (keyup.enter)="addUser()" id="name" name="name" #name="ngModel">
                         </div>
                         <div class="col-12">
-                            <button type="button" class="btn btn-primary btn-block" (click)="addUser()" [disabled]="isLoading || hasError || !name.valid" >Add user</button>
+                            <button type="button" class="btn btn-primary btn-block" (click)="addUser()" [disabled]="isLoading || errorMessage !== null || !name.valid" >Add user</button>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 @Component({
@@ -11,7 +11,7 @@ export class AppComponent {
   username: '';
   users: any[];
   isLoading = false;
-  hasError = false;
+  errorMessage: string = null;
 
   private baseUri = 'https://ntfrex-function-helloworld.azurewebsites.net/api/';
 
@@ -21,8 +21,8 @@ export class AppComponent {
 
   private handleError() {
       const self = this;
-      return catchError((error) => {
-        self.hasError = true;
+      return catchError((error: HttpErrorResponse) => {
+        self.errorMessage = error.message;
         self.isLoading = false;
         self.users = null;
         throw error;
