@@ -1,0 +1,21 @@
+<form id="addUserForm">
+    <div class="container">
+        <div class="row">
+            <div class="col-12"><h4>Add User</h4></div>
+        </div>
+        <div class="row">
+            <div class="col-3">Name</div>
+            <div class="col-9">
+                <input required type="text" class="form-control full-width" [(ngModel)]="model.name" (keyup.enter)="addUser()" id="name" name="name" #name="ngModel">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-primary btn-block" (click)="addUser()" [disabled]="isLoading || !name.valid">
+                    <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>    
+                    Add user
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

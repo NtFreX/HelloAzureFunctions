@@ -5,10 +5,16 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
+import { UserManagementComponent } from './user/management/user-management.component';
+import { AddUserComponent } from './user/add/add-user.component';
+import { UserListComponent } from './user/list/user-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserManagementComponent,
+    UserListComponent,
+    AddUserComponent
   ],
   imports: [
     NgbModule,
