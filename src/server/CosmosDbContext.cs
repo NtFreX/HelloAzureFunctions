@@ -5,13 +5,12 @@ namespace NtFreX.HelloAzureFunctions.Repositories {
     public class CosmosDbContext : DbContext {
         public const string ContainerName = "Container";
 
-        private readonly string _connectionKey;
-        private readonly string _connectionEndpoint;
-
         public DbSet<UserEntity> Users;
 
         public CosmosDbContext(DbContextOptions<CosmosDbContext> options)
-            :base(options) { }
+            :base(options) { 
+            Database.EnsureCreated();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
