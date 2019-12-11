@@ -11,6 +11,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 
 namespace NtFreX.HelloAzureFunctions {
@@ -53,8 +54,9 @@ namespace NtFreX.HelloAzureFunctions {
             var ui = new SwaggerUI();
             var result = await ui
                 .AddServer(req, ApiPrefix)
+                .AddMetadata(new OpenApiInfo { Version = "1.0.0", Title = "Azure Functions Hello World", License = new OpenApiLicense { Name = "None" } })
                 .BuildAsync()
-                .RenderAsync("api/swagger.json")
+                .RenderAsync("swagger.json")
                 .ConfigureAwait(false);
             
             var response = new ContentResult()
