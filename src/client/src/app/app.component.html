@@ -35,14 +35,18 @@
             </table>
         </div>
         <div class="col-lg-3">
-            <form>
+            <form id="addUserForm">
                 <div class="container">
                     <div class="row">
                         <div class="col-12"><h4>Add User</h4></div>
+                    </div>
+                    <div class="row">
                         <div class="col-3">Name</div>
                         <div class="col-9">
                             <input required type="text" class="form-control full-width" [(ngModel)]="username" (keyup.enter)="addUser()" id="name" name="name" #name="ngModel">
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-12">
                             <button type="button" class="btn btn-primary btn-block" (click)="addUser()" [disabled]="isLoading || errorMessage !== null || !name.valid" >Add user</button>
                         </div>
