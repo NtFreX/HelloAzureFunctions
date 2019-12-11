@@ -14,8 +14,8 @@ namespace NtFreX.HelloAzureFunctions
         public override void Configure(IFunctionsHostBuilder builder)
         {
             builder.Services.AddLogging();
+            builder.Services.AddDbContext<CosmosDbContext>();
             builder.Services.AddTransient<UserRepository>();
-            builder.Services.AddTransient<CosmosDbContext>();
 
             SetupDatabase(builder.Services.BuildServiceProvider()).GetAwaiter().GetResult();
         }
