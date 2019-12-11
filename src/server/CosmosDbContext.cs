@@ -3,7 +3,6 @@ using NtFreX.HelloAzureFunctions.Entities;
 
 namespace NtFreX.HelloAzureFunctions.Repositories {
     public class CosmosDbContext : DbContext {
-        public const string ContainerName = "Container";
 
         public DbSet<UserEntity> Users { get; set; }
 
@@ -14,8 +13,9 @@ namespace NtFreX.HelloAzureFunctions.Repositories {
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultContainer(ContainerName);
-            modelBuilder.Entity<UserEntity>().ToContainer("Users");
+            modelBuilder
+                .Entity<UserEntity>()
+                .ToContainer("Users");
         }
     }
 }
