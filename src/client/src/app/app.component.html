@@ -8,9 +8,11 @@
 
   <div>
     <div *ngFor="let user of users; let i = index">
-        <button (click)="deleteUser(user)">X</button><span>{{i}} {{user.name}}</span>
+        <button (click)="deleteUser(user)" [disabled]="isLoading">X</button><span>{{i}} {{user.name}}</span>
     </div>
-</div>
+
+    <p *ngIf="users.length === 0">No users are registered</p>
+  </div>
 
   <div>
     <input [(ngModel)]="username">
