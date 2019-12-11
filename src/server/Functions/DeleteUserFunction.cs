@@ -20,6 +20,7 @@ namespace NtFreX.HelloAzureFunctions.Functions
 
         [FunctionName("DeleteUserFunction")]
         [OpenApiOperation("delete", "user")]
+        [OpenApiParameter("id")]
         public async Task<IActionResult> Get(
             [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "user/{id}")] HttpRequest req,
             Guid id,
