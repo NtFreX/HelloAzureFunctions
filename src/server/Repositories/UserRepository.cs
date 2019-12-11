@@ -16,7 +16,7 @@ namespace NtFreX.HelloAzureFunctions.Repositories {
             return _dbContext.Users.ToArray();
         }
 
-        public async Task DeleteByIdAsync(int id) {
+        public async Task DeleteByIdAsync(Guid id) {
             var entity = _dbContext.Users.Find(id);
             _dbContext.Users.Remove(entity);
             await _dbContext.SaveChangesAsync();

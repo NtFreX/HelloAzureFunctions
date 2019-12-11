@@ -24,6 +24,7 @@ export class AppComponent {
       const self = this;
       return catchError((error) => {
         self.hasError = true;
+        self.isLoading = false;
         self.users = null;
         throw error;
       });
@@ -31,7 +32,6 @@ export class AppComponent {
 
   private load(): void {
     this.isLoading = true;
-    this.users = null;
     const self = this;
     this.client
     .get(this.baseUri + 'users')
