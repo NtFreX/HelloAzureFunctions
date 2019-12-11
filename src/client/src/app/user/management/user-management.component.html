@@ -1,10 +1,18 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-9">
-            <app-user-list></app-user-list>
+            <div class="card">
+                <div class="card-body">
+                    <app-user-list></app-user-list>
+                </div>
+            </div>
         </div>
         <div class="col-lg-3">
-            <app-add-user (userAdded)="onUserAdded()"></app-add-user>
+            <div class="card">
+                <div class="card-body">
+                    <app-add-user (userAdded)="onUserAdded()"></app-add-user>
+                </div>
+            </div>
         </div>
     </div>
 </div>
