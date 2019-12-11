@@ -8,9 +8,8 @@ import { catchError } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'client';
   username: '';
-  users: any;
+  users: any[];
   isLoading = false;
   hasError = false;
 
@@ -36,7 +35,7 @@ export class AppComponent {
     this.client
     .get(this.baseUri + 'users')
     .pipe(this.handleError())
-    .subscribe((data) => {
+    .subscribe((data: any[]) => {
         self.users = data;
         self.isLoading = false;
     });

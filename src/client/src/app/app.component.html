@@ -1,59 +1,54 @@
-<div>
+<div class="container-fluid">
     <h1>
-        Welcome to {{ title }}!
+        Welcome
     </h1>
 
     <ngb-alert *ngIf="hasError" type="danger" [dismissible]="false">An error occurred</ngb-alert>
     <div *ngIf="isLoading" class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+        <div class="progress-bar progress-bar-striped progress-bar-animated full-width" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-9">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Id</th>
-                            <th scope="col">Name</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ngb-alert *ngIf="users && users.length === 0 && !isLoading" type="info" [dismissible]="false">No users are registered</ngb-alert>
-                        <tr *ngFor="let user of users; index as i">
-                            <th scope="row">{{ i + 1 }}</th>
-                            <td>{{ user.id }}</td>
-                            <td>{{ user.name }}</td>
-                            <td>
-                                <button (click)="deleteUser(user)" [disabled]="isLoading" type="button" class="btn btn-outline-danger">
-                                    <img src="/assets/trash.svg" width="24" height="24" title="Trash">
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-lg-3">
-                <form>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12"><h4>Add User</h4></div>
-                            <div class="col-3">Name</div>
-                            <div class="col-9">
-                                <input required type="text" class="form-control" [(ngModel)]="username" (keyup.enter)="addUser()" style="width: 100%;" id="name" name="name" #name="ngModel">
-                                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-                                    Name is required
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button type="button" class="btn btn-primary btn-block" (click)="addUser()" [disabled]="isLoading || hasError || !name.valid" >Add user</button>
-                            </div>
+    <div class="row">
+        <div class="col-lg-9">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ngb-alert *ngIf="users && users.length === 0 && !isLoading" type="info" [dismissible]="false">No users are registered</ngb-alert>
+                    <tr *ngFor="let user of users; index as i">
+                        <th scope="row">{{ i + 1 }}</th>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>
+                            <button (click)="deleteUser(user)" [disabled]="isLoading" type="button" class="btn btn-outline-danger">
+                                <img src="/assets/trash.svg" width="24" height="24" title="Trash">
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-3">
+            <form>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12"><h4>Add User</h4></div>
+                        <div class="col-3">Name</div>
+                        <div class="col-9">
+                            <input required type="text" class="form-control full-width" [(ngModel)]="username" (keyup.enter)="addUser()" id="name" name="name" #name="ngModel">
+                        </div>
+                        <div class="col-12">
+                            <button type="button" class="btn btn-primary btn-block" (click)="addUser()" [disabled]="isLoading || hasError || !name.valid" >Add user</button>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
