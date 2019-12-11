@@ -22,12 +22,14 @@ export class AppComponent {
       const self = this;
       return catchError((error) => {
         self.hasError = true;
+        self.users = null;
         throw error;
       });
   }
 
   private load(): void {
     this.isLoading = true;
+    this.users = null;
     const self = this;
     this.client
     .get('https://ntfrex-function-helloworld.azurewebsites.net/api/users')
@@ -36,6 +38,15 @@ export class AppComponent {
         self.users = data;
         self.isLoading = false;
     });
+  }
+
+  deleteUser(user: any): void {
+    this.isLoading = true;
+    const self = this;
+    this.client
+        .delete(`https://ntfrex-function-helloworld.azurewebsites.net/api/user/${user.id}`)
+        .pipe(this.handleError())
+        .subscribe(() => self.load());
   }
 
   addUser(): void {

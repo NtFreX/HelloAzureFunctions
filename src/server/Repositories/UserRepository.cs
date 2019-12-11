@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using NtFreX.HelloAzureFunctions.Entities;
 
 namespace NtFreX.HelloAzureFunctions.Repositories {
@@ -13,10 +12,14 @@ namespace NtFreX.HelloAzureFunctions.Repositories {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public UserEntity[] GetUsers(ILogger logger) {
-            logger.LogInformation($"{nameof(UserRepository)}.{nameof(GetUsers)} has been called");
-            logger.LogInformation($"Is DbContext.Users null = {_dbContext?.Users == null}");
+        public UserEntity[] GetUsers() {
             return _dbContext.Users.ToArray();
+        }
+
+        public async Task DeleteByIdAsync(int id) {
+            var entity = _dbContext.Users.Find(id);
+            _dbContext.Users.Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task AddUserAsync(UserEntity user) { 

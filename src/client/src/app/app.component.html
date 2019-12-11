@@ -3,11 +3,14 @@
     Welcome to {{ title }}!
   </h1>
 
-  <ul>
-    <li *ngFor="let user of users; let i = index">
-        {{i}} {{user.name}}
-    </li>
-  </ul>
+  <p *ngIf="isLoading">Loading...</p>
+  <p *ngIf="hasError" style="color:red;">An error occurred</p>
+
+  <div>
+    <div *ngFor="let user of users; let i = index">
+        <button (click)="deleteUser(user)">X</button><span>{{i}} {{user.name}}</span>
+    </div>
+</div>
 
   <div>
     <input [(ngModel)]="username">
