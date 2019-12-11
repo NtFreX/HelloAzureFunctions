@@ -16,7 +16,7 @@ namespace NtFreX.HelloAzureFunctions.Repositories {
         public UserEntity[] GetUsers(ILogger logger) {
             logger.LogInformation($"{nameof(UserRepository)}.{nameof(GetUsers)} has been called");
             logger.LogInformation($"Is DbContext.Users null = {_dbContext?.Users == null}");
-            return _dbContext.Users.AsQueryable().ToArray();
+            return _dbContext.Users.ToArray();
         }
 
         public async Task AddUserAsync(UserEntity user) { 

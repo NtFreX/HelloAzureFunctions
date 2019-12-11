@@ -5,7 +5,7 @@ namespace NtFreX.HelloAzureFunctions.Repositories {
     public class CosmosDbContext : DbContext {
         public const string ContainerName = "Container";
 
-        public DbSet<UserEntity> Users;
+        public DbSet<UserEntity> Users { get; set; }
 
         public CosmosDbContext(DbContextOptions<CosmosDbContext> options)
             :base(options) { 
