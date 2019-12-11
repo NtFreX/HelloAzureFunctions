@@ -52,9 +52,17 @@ namespace NtFreX.HelloAzureFunctions {
             ILogger log)
         {
             var ui = new SwaggerUI();
+            var metaData = new OpenApiInfo { 
+                Version = "1.0.0", 
+                Title = "Azure Functions Hello World", 
+                License = new OpenApiLicense { 
+                    Name = "None" 
+                } 
+            };
+
             var result = await ui
                 .AddServer(req, ApiPrefix)
-                .AddMetadata(new OpenApiInfo { Version = "1.0.0", Title = "Azure Functions Hello World", License = new OpenApiLicense { Name = "None" } })
+                .AddMetadata(metaData)
                 .BuildAsync()
                 .RenderAsync("swagger.json")
                 .ConfigureAwait(false);

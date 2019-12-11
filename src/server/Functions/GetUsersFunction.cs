@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using NtFreX.HelloAzureFunctions.Repositories;
 using System;
+using Aliencube.AzureFunctions.Extensions.OpenApi.Attributes;
+using System.Net;
+using NtFreX.HelloAzureFunctions.Entities;
 
 namespace NtFreX.HelloAzureFunctions.Functions
 {
@@ -17,6 +20,8 @@ namespace NtFreX.HelloAzureFunctions.Functions
         }
 
         [FunctionName("GetUsersFunction")]
+        [OpenApiOperation("get", "users")]
+        [OpenApiResponseBody(HttpStatusCode.OK, "application/json", typeof(UserEntity[]))]
         public IActionResult Get(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "users")] HttpRequest req,
             ILogger log)

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using NtFreX.HelloAzureFunctions.Repositories;
 using System;
 using System.Threading.Tasks;
+using Aliencube.AzureFunctions.Extensions.OpenApi.Attributes;
 
 namespace NtFreX.HelloAzureFunctions.Functions
 {
@@ -18,6 +19,7 @@ namespace NtFreX.HelloAzureFunctions.Functions
         }
 
         [FunctionName("DeleteUserFunction")]
+        [OpenApiOperation("delete", "user")]
         public async Task<IActionResult> Get(
             [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "user/{id}")] HttpRequest req,
             Guid id,
