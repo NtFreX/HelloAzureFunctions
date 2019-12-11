@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Aliencube.AzureFunctions.Extensions.OpenApi.Attributes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -22,6 +23,8 @@ namespace NtFreX.HelloAzureFunctions.Functions
         }
 
         [FunctionName("AddUserFunction")]
+        [OpenApiOperation("add", "user")]
+        [OpenApiRequestBody("application/json", typeof(UserEntity))]
         public async Task<IActionResult> Get(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "user")] HttpRequest req,
             ILogger log)

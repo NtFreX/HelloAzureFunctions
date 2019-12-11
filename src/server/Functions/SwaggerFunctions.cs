@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -57,7 +58,11 @@ namespace NtFreX.HelloAzureFunctions {
                 Title = "Azure Functions Hello World", 
                 License = new OpenApiLicense { 
                     Name = "None" 
-                } 
+                },
+                Contact = new OpenApiContact {
+                    Email = "ntfrex@gmail.com",
+                    Url = new Uri("https://github.com/NtFreX/HelloAzureFunctions")
+                }
             };
 
             var result = await ui
