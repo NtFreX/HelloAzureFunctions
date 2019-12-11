@@ -54,7 +54,7 @@ namespace NtFreX.HelloAzureFunctions {
             var result = await ui
                 .AddServer(req, ApiPrefix)
                 .BuildAsync()
-                .RenderAsync("swagger.json")
+                .RenderAsync("api/swagger.json")
                 .ConfigureAwait(false);
             
             var response = new ContentResult()
