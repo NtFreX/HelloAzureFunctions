@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 
 namespace NtFreX.HelloAzureFunctions {
@@ -51,10 +53,12 @@ namespace NtFreX.HelloAzureFunctions {
             ILogger log)
         {
             var ui = new SwaggerUI();
+            var authKey =  Environment.GetEnvironmentVariable("OpenApi__ApiKey", EnvironmentVariableTarget.Process);
+
             var result = await ui
                 .AddServer(req, ApiPrefix)
                 .BuildAsync()
-                .RenderAsync("swagger.json")
+                .RenderAsync("swagger.json", authKey)
                 .ConfigureAwait(false);
             
             var response = new ContentResult()
