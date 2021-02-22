@@ -1,7 +1,9 @@
-Live application can be found here:
+The pages below are not live anymore as the credit on my student account run out.
 
-https://hellostaticwebapp.azurewebsites.net/
+***Live application can be found here:***
 
-Live api browser can be found here:
+***https://hellostaticwebapp.azurewebsites.net/***
 
-https://ntfrex-function-helloworld.azurewebsites.net/api/swagger/ui
+***Live api browser can be found here:***
+
+***https://ntfrex-function-helloworld.azurewebsites.net/api/swagger/ui***
